@@ -4,11 +4,45 @@ const lista_tareas = document.querySelector('.lista-tareas');
 const boton_limpiar = document.querySelector('.boton-limpiar');
 
 boton_agregar.addEventListener('click', () => {
-  agregarTarea("")
+  agregarTarea("");
 })
 
 boton_limpiar.addEventListener('click', () => {
-  limpiarTodo()
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: true
+  })
+  
+  swalWithBootstrapButtons.fire({
+    title: 'Está seguro?',
+    text: "Los cambios no podrán ser revertidos.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Si, borrar.',
+    cancelButtonText: 'No, cancelar.',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      swalWithBootstrapButtons.fire(
+        'Borrado',
+        'Sus tareas han sido borradas',
+        'success',
+        limpiarTodo()
+      )
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelado',
+        'Sus tareas están seguras.',
+        'error'
+      )
+    }
+  })
 })
 
 lista_tareas.addEventListener('click', (event) => {
