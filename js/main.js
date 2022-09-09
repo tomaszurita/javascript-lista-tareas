@@ -33,7 +33,6 @@ boton_limpiar.addEventListener('click', () => {
         limpiarTodo()
       )
     } else if (
-      /* Read more about handling dismissals below */
       result.dismiss === Swal.DismissReason.cancel
     ) {
       swalWithBootstrapButtons.fire(
@@ -87,6 +86,13 @@ const setArregloTareas = () => {
   localStorage.setItem("arregloTareas",JSON.stringify(arregloTareas))
   listarTareas()
 }
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+  .then( (resp) => console.log(resp) )
+  .then( (data) => {
+    console.log(data)
+})
+
 
 const agregarTarea = (descripcion) => {
   contador++
