@@ -88,11 +88,11 @@ const setArregloTareas = () => {
 }
 
 fetch('https://jsonplaceholder.typicode.com/posts')
-  .then( (resp) => console.log(resp) )
-  .then( (data) => {
+  .then( response => response.json() )
+  .then( data => {
     console.log(data)
 })
-
+.catch(err => console.log(err))
 
 const agregarTarea = (descripcion) => {
   contador++
